@@ -1,24 +1,61 @@
 body {
-    background-color: #0f0f0f; /* Ciemne tło */
-    color: #00ff99;           /* Neonowa zieleń */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a0033; /* Ciemny fiolet */
+    color: #e0b3ff;           /* Jasny fioletowy tekst */
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Nawigacja - Zakładki */
+nav {
+    background: #2d0059;
+    width: 100%;
+    padding: 15px 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    gap: 20px;
+    border-bottom: 2px solid #8a2be2;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: #d8b4fe;
 }
 
 .container {
     text-align: center;
-    border: 2px solid #00ff99;
-    padding: 40px;
+    margin-top: 50px;
+    padding: 30px;
+    border: 2px solid #8a2be2;
     border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 255, 153, 0.2);
+    box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
 }
 
-h1 {
-    font-size: 3rem;
-    text-transform: uppercase;
-    letter-spacing: 5px;
+/* Przyciski pobierania */
+.download-btn {
+    display: inline-block;
+    background-color: #8a2be2;
+    color: white;
+    padding: 12px 25px;
+    margin: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+    border: none;
+    cursor: pointer;
+}
+
+.download-btn:hover {
+    background-color: #a04ef6;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #8a2be2;
 }

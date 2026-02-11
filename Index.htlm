@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Strona QiuX</title>
+    <meta charset="UTF-8">
+    <title>Strona Qiux</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Cześć, tu QiuX!</h1>
-    <p>to jest strona z wszystkimi prokektami Q i X</p>
+    <div class="container">
+        <h1>QiuX</h1>
+        <p>to jest strona z wszystkimi prokektami Q i X| RTX 3060 And GitHube Powered</p>
+    </div>
 </body>
 </html>

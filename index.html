@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QiuX Hub | GitHube Powered</title>
+    <title>QiuX Hub | Projekty Q i X</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <nav>
         <a href="#home">Start</a>
-        <a href="#projekty">O Projektach</a>
-        <a href="#download">Pobieranie</a>
+        <a href="#projekty">Moje Projekty</a>
+        <a href="#status">Status Prac</a>
     </nav>
 
     <header class="container" id="home">
@@ -24,23 +24,26 @@
     </header>
 
     <section class="container" id="projekty">
-        <h2>Nasze Projekty</h2>
-        <p>Tutaj znajdziesz przeglądarkę QBrowser oraz inne nadchodzące projekty Q i X.</p>
-        <div style="margin-top: 20px; padding: 15px; background: rgba(138, 43, 226, 0.1); border-radius: 10px;">
-            <p>Aktualnie rozwijamy: <strong>QBrowser</strong></p>
+        <h2>Nadchodzące Projekty</h2>
+        <p>Pracujemy nad czymś nowym i lepszym. Już niedługo pojawią się tutaj nowe narzędzia.</p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 30px;">
+            <div style="padding: 20px; border: 2px dashed #8a2be2; border-radius: 15px; background: rgba(138, 43, 226, 0.05);">
+                <h3>Projekt Q</h3>
+                <p>W przygotowaniu...</p>
+            </div>
+            <div style="padding: 20px; border: 2px dashed #8a2be2; border-radius: 15px; background: rgba(138, 43, 226, 0.05);">
+                <h3>Projekt X</h3>
+                <p>W przygotowaniu...</p>
+            </div>
         </div>
     </section>
 
-    <section class="container" id="download">
-        <h2>Pobieralnia</h2>
-        <p>Kliknij przycisk poniżej, aby pobrać najnowszą wersję QBrowser.</p>
-        
-        <div style="margin-top: 30px;">
-            <a href="https://www.mediafire.com/file/n4ct73tu2h3q9dy/QBrowser.rar/file" 
-               class="download-btn" 
-               target="_blank">
-               Pobierz QBrowser.rar
-            </a>
+    <section class="container" id="status">
+        <h2>Status Systemu</h2>
+        <p>Wszystkie stare wersje zostały wycofane. Czekaj na aktualizacje!</p>
+        <div style="margin-top: 20px; display: inline-block; padding: 10px 20px; background: #4b0082; border-radius: 50px; border: 1px solid #bc13fe;">
+            <span style="color: #00ff00;">●</span> Serwery GitHube Online
         </div>
     </section>
 

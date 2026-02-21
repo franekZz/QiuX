@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #0d001a; /* Głęboki fioletowy mrok */
+    background-color: #0d001a;
     color: #ffffff;
     line-height: 1.6;
     overflow-x: hidden;
@@ -81,23 +81,22 @@ body.light-mode .container {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* NAGŁÓWKI - POPRAWIONY QiuX */
+/* NEONOWY NAGŁÓWEK QiuX */
 h1 {
     font-size: 3.5rem;
     color: #bc13fe;
     margin-bottom: 10px;
     letter-spacing: 5px;
-    text-transform: none; /* Pozwala na pisownię QiuX */
-    text-shadow: 0 0 10px #bc13fe, 0 0 20px #8a2be2; /* Efekt neonu */
+    text-transform: none; 
+    text-shadow: 0 0 10px #bc13fe, 0 0 20px #8a2be2;
 }
 
 h2 {
     color: #00d4ff;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
 }
 
-/* PRZYCISKI Z ANIMACJĄ */
+/* PRZYCISKI */
 .download-btn {
     display: inline-block;
     padding: 15px 35px;
@@ -108,7 +107,7 @@ h2 {
     transition: 0.4s;
     cursor: pointer;
     margin: 10px;
-    animation: pulse 2s infinite; /* Pulsowanie zawsze włączone */
+    animation: pulse 2s infinite;
 }
 
 .download-btn:hover {
@@ -116,7 +115,6 @@ h2 {
     box-shadow: 0 0 25px rgba(0, 212, 255, 0.8);
 }
 
-/* ANIMACJA PULSOWANIA */
 @keyframes pulse {
     0% { box-shadow: 0 0 0 0 rgba(188, 19, 254, 0.4); }
     70% { box-shadow: 0 0 0 15px rgba(188, 19, 254, 0); }
@@ -128,11 +126,4 @@ footer {
     padding: 20px;
     color: #555;
     font-size: 0.9rem;
-}
-
-/* RESPONSYWNOŚĆ */
-@media (max-width: 600px) {
-    h1 { font-size: 2.5rem; }
-    nav { flex-wrap: wrap; gap: 10px; font-size: 0.9rem; }
-    .container { margin: 20px; padding: 15px; }
 }

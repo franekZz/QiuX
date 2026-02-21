@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QiuX Terminal | System Console</title>
+    <title>QiuX Terminal | Terminal Zabawy</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specjalne style dla terminala */
         .terminal-fullscreen {
             background: #000;
             border: 2px solid #bc13fe;
@@ -20,7 +19,6 @@
             transition: 0.5s;
         }
 
-        /* Tryb jasny dla terminala */
         body.light-mode .terminal-fullscreen {
             background: #ffffff !important;
             border: 2px solid #8a2be2 !important;
@@ -53,38 +51,35 @@
 
     <header class="container">
         <h1>KomendQiuX</h1>
-        <p>Główny terminal zarządzania projektami Q i X</p>
+        <p>Terminal Zabawy - Sprawdź co potrafi system QiuX</p>
     </header>
 
     <section class="container terminal-fullscreen">
         <div class="terminal-header" style="color: #bc13fe; border-bottom: 1px solid #bc13fe; padding-bottom: 10px; margin-bottom: 15px; font-size: 0.8rem;">
-            [ QiuX OS v1.0.4 - Terminal Session Active ]
+            [ QiuX Fun Terminal v1.0.4 - Sandbox Mode ]
         </div>
         
         <div id="terminal-output" style="color: #00ff00; flex-grow: 1; overflow-y: auto; font-size: 1rem; line-height: 1.5;">
-            Czekam na dane... Wpisz 'help' aby rozpocząć.
+            Witaj w Terminalu Zabawy! Wpisz 'help', aby odkryć sekrety.
         </div>
 
         <div style="display: flex; margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
-            <span style="color: #00d4ff; margin-right: 15px; font-weight: bold;">root@QiuX:~#</span>
+            <span style="color: #00d4ff; margin-right: 15px; font-weight: bold;">user@QiuX_Fun:~$</span>
             <input type="text" id="terminal-input" autofocus style="background: none; border: none; color: #fff; outline: none; width: 100%; font-family: 'Courier New', monospace; font-size: 1rem;">
         </div>
     </section>
 
     <script>
-        // Zegar
         function updateClock() {
             document.getElementById('qx-clock').innerText = new Date().toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Funkcja zmiany motywu
         function toggleTheme() {
             document.getElementById('main-body').classList.toggle('light-mode');
         }
 
-        // Obsługa terminala
         const input = document.getElementById('terminal-input');
         const output = document.getElementById('terminal-output');
 
@@ -96,31 +91,43 @@
                 let response = "";
 
                 if (cmd === 'help') {
-                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Powrót do index<br>- <span style='color:#bc13fe'>wifi on</span> / <span style='color:#bc13fe'>wifi true</span>: Status sieci<br>- <span style='color:#bc13fe'>wifi off</span> / <span style='color:#bc13fe'>wifi false</span>: Wyłącz sieć (404)<br>- <span style='color:#bc13fe'>specs</span>: Hardware info<br>- <span style='color:#bc13fe'>clear</span>: Czyść ekran";
+                    response = "KOMENDY ZABAWY:<br>- <span style='color:#bc13fe'>start</span>: Wyjdź z terminala<br>- <span style='color:#bc13fe'>wifi on / true</span>: Sprawdź sieć<br>- <span style='color:#bc13fe'>wifi off / false</span>: Zepsuj system (404)<br>- <span style='color:#bc13fe'>delete this sites</span>: USUŃ STRONĘ (OSTRZEŻENIE!)<br>- <span style='color:#bc13fe'>specs</span>: Moja maszyna (RTX 3060)<br>- <span style='color:#bc13fe'>clear</span>: Wyczyść ekran";
                 } 
+                else if (cmd === 'delete this sites') {
+                    output.innerHTML = "<span style='color:red'>INICJOWANIE DESTRUKCJI PLIKÓW... 100%</span>";
+                    setTimeout(() => {
+                        document.body.innerHTML = `
+                        <div style="background:#000; color:#fff; height:100vh; display:flex; flex-direction:column; justify-content:center; align-items:center; font-family:sans-serif; text-align:center; padding:20px;">
+                            <h1 style="color:#bc13fe; font-size:3rem; margin-bottom:20px;">QiuX Security</h1>
+                            <p style="font-size:1.5rem;">Ty naprawdę myślałeś, że usuniesz stronę?</p>
+                            <a href="index.html" style="margin-top:30px; padding:15px 30px; background:#bc13fe; color:white; text-decoration:none; border-radius:50px; font-weight:bold; box-shadow: 0 0 20px #bc13fe;">Powrót Do Strony Głównej</a>
+                        </div>`;
+                    }, 1200);
+                    return;
+                }
                 else if (cmd === 'wifi on' || cmd === 'wifi true') {
-                    response = "Inicjowanie... Masz dawno wifi.";
+                    response = "Inicjowanie połączenia... Masz dawno wifi.";
                 }
                 else if (cmd === 'wifi off' || cmd === 'wifi false') {
-                    output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br><span style='color:red'>CRITICAL ERROR: WIFI DISCONNECTED</span>`;
+                    output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br><span style='color:red'>CRITICAL: WIFI SYSTEM FAILURE!</span>`;
                     setTimeout(() => {
                         document.body.innerHTML = '<div style="background:#000;color:#fff;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif"><h1>404</h1><p>System Offline: Wifi Card Not Found</p><button onclick="location.reload()" style="padding:10px;margin-top:20px;cursor:pointer;background:#bc13fe;border:none;color:white;font-weight:bold;">REBOOT SYSTEM</button></div>';
                     }, 1500);
                     return;
                 }
                 else if (cmd === 'start') {
-                    response = "Przekierowanie...";
+                    response = "Zamykanie terminala...";
                     setTimeout(() => window.location.href = "index.html", 800);
                 }
                 else if (cmd === 'specs') {
-                    response = "GPU: RTX 3060 | MBD: Gigabyte | CPU: QiuX-Engine";
+                    response = "HARDWARE INFO:<br>GPU: NVIDIA RTX 3060<br>MBD: GIGABYTE Technology<br>STATUS: Wszystko działa jak należy.";
                 }
                 else if (cmd === 'clear') {
                     output.innerHTML = "Konsola wyczyszczona.";
                     return;
                 }
                 else {
-                    response = "Błąd: Polecenie '" + cmd + "' nie rozpoznane.";
+                    response = "Błąd: Polecenie '" + cmd + "' nie jest znane w trybie zabawy.";
                 }
 
                 output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br>${response}`;
@@ -155,11 +162,6 @@
             requestAnimationFrame(anim);
         }
         anim();
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
     </script>
 </body>
 </html>

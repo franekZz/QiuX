@@ -6,7 +6,6 @@
     <title>QiuX Terminal | System Console</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Styl specjalnie dla trybu pełnoekranowego terminala */
         .terminal-fullscreen {
             background: #000 !important;
             border: 2px solid #bc13fe !important;
@@ -68,33 +67,36 @@
                 
                 let response = "";
 
+                // Nowa logika komend wifi
                 if (cmd === 'help') {
-                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Wróć do strony głównej<br>- <span style='color:#bc13fe'>specs</span>: Pokaż hardware (RTX 3060)<br>- <span style='color:#bc13fe'>wifi off</span>: Rozłącz system (SEKRET)<br>- <span style='color:#bc13fe'>clear</span>: Wyczyść ekran";
+                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Powrót<br>- <span style='color:#bc13fe'>specs</span>: Hardware<br>- <span style='color:#bc13fe'>wifi on</span> / <span style='color:#bc13fe'>wifi true</span>: Włącz sieć<br>- <span style='color:#bc13fe'>wifi off</span> / <span style='color:#bc13fe'>wifi false</span>: Wyłącz sieć (SEKRET)<br>- <span style='color:#bc13fe'>clear</span>: Wyczyść";
                 } 
-                else if (cmd === 'start') {
-                    response = "Inicjowanie powrotu...";
-                    setTimeout(() => window.location.href = "index.html", 1000);
+                else if (cmd === 'wifi on' || cmd === 'wifi true') {
+                    response = "<span style='color:#00ff00;'>Inicjowanie sterowników...</span><br>Masz dawno wifi.";
                 }
-                else if (cmd === 'specs') {
-                    response = "GPU: Nvidia GeForce RTX 3060<br>MBD: Gigabyte Motherboard (BIOS: DEL to enter)<br>OS: QiuX Hub Engine";
-                }
-                else if (cmd === 'clear') {
-                    output.innerHTML = "Konsola wyczyszczona.";
-                    return;
-                }
-                else if (cmd === 'wifi off') {
-                    output.innerHTML = "<span style='color:red'>WARNING: DEACTIVATING NETWORK ADAPTER...</span>";
+                else if (cmd === 'wifi off' || cmd === 'wifi false') {
+                    output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br><span style='color:red'>WARNING: DISCONNECTING...</span>`;
                     setTimeout(() => {
                         document.body.innerHTML = '<div style="background:#000;color:#fff;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif"><h1>404</h1><p>System Offline: Wifi Card Not Found</p><button onclick="location.reload()" style="padding:10px;margin-top:20px;cursor:pointer;background:#bc13fe;border:none;color:white;font-weight:bold;">REBOOT SYSTEM</button></div>';
                     }, 1500);
                     return;
                 }
+                else if (cmd === 'start') {
+                    response = "Przekierowanie...";
+                    setTimeout(() => window.location.href = "index.html", 800);
+                }
+                else if (cmd === 'specs') {
+                    response = "GPU: RTX 3060 | MBD: Gigabyte | QiuX-Core Engine Active.";
+                }
+                else if (cmd === 'clear') {
+                    output.innerHTML = "Konsola wyczyszczona.";
+                    return;
+                }
                 else {
-                    response = "Błąd: Polecenie '" + cmd + "' nie istnieje w bazie QiuX.";
+                    response = "Błąd: Polecenie '" + cmd + "' nie rozpoznane.";
                 }
 
                 output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br>${response}`;
-                // Przewijanie na dół
                 output.scrollTop = output.scrollHeight;
             }
         });
@@ -107,7 +109,7 @@
         class P {
             constructor() {
                 this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.sX = Math.random() * 0.6 - 0.3; this.sY = Math.random() * 0.6 - 0.3;
+                this.sX = Math.random() * 0.4 - 0.2; this.sY = Math.random() * 0.4 - 0.2;
             }
             draw() {
                 ctx.fillStyle = '#8a2be2'; ctx.beginPath();

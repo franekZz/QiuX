@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QiuX Terminal | System Console</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Styl specjalnie dla trybu pełnoekranowego terminala */
+        .terminal-fullscreen {
+            background: #000 !important;
+            border: 2px solid #bc13fe !important;
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <canvas id="bg-canvas"></canvas>
+
+    <nav>
+        <a href="index.html">Powrót</a>
+        <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
+    </nav>
+
+    <header class="container">
+        <h1>KomendQiuX</h1>
+        <p>Główny terminal zarządzania projektami Q i X</p>
+    </header>
+
+    <section class="container terminal-fullscreen">
+        <div style="color: #bc13fe; border-bottom: 1px solid #bc13fe; padding-bottom: 10px; margin-bottom: 15px;">
+            [ QiuX OS v1.0.4 - Terminal Session Active ]
+        </div>
+        
+        <div id="terminal-output" style="color: #00ff00; flex-grow: 1; overflow-y: auto; font-size: 1rem; line-height: 1.5;">
+            Czekam na dane... Wpisz 'help' aby rozpocząć.
+        </div>
+
+        <div style="display: flex; margin-top: 20px; border-top: 1px solid #333; padding-top: 15px;">
+            <span style="color: #00d4ff; margin-right: 15px; font-weight: bold;">root@QiuX:~#</span>
+            <input type="text" id="terminal-input" autofocus style="background: none; border: none; color: #fff; outline: none; width: 100%; font-family: 'Courier New', monospace; font-size: 1rem;">
+        </div>
+    </section>
+
+    <script>
+        // Zegar
+        function updateClock() {
+            document.getElementById('qx-clock').innerText = new Date().toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Obsługa terminala
+        const input = document.getElementById('terminal-input');
+        const output = document.getElementById('terminal-output');
+
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const cmd = input.value.toLowerCase().trim();
+                input.value = '';
+                
+                let response = "";
+
+                if (cmd === 'help') {
+                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Wróć do strony głównej<br>- <span style='color:#bc13fe'>specs</span>: Pokaż hardware (RTX 3060)<br>- <span style='color:#bc13fe'>wifi off</span>: Rozłącz system (SEKRET)<br>- <span style='color:#bc13fe'>clear</span>: Wyczyść ekran";
+                } 
+                else if (cmd === 'start') {
+                    response = "Inicjowanie powrotu...";
+                    setTimeout(() => window.location.href = "index.html", 1000);
+                }
+                else if (cmd === 'specs') {
+                    response = "GPU: Nvidia GeForce RTX 3060<br>MBD: Gigabyte Motherboard (BIOS: DEL to enter)<br>OS: QiuX Hub Engine";
+                }
+                else if (cmd === 'clear') {
+                    output.innerHTML = "Konsola wyczyszczona.";
+                    return;
+                }
+                else if (cmd === 'wifi off') {
+                    output.innerHTML = "<span style='color:red'>WARNING: DEACTIVATING NETWORK ADAPTER...</span>";
+                    setTimeout(() => {
+                        document.body.innerHTML = '<div style="background:#000;color:#fff;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif"><h1>404</h1><p>System Offline: Wifi Card Not Found</p><button onclick="location.reload()" style="padding:10px;margin-top:20px;cursor:pointer;background:#bc13fe;border:none;color:white;font-weight:bold;">REBOOT SYSTEM</button></div>';
+                    }, 1500);
+                    return;
+                }
+                else {
+                    response = "Błąd: Polecenie '" + cmd + "' nie istnieje w bazie QiuX.";
+                }
+
+                output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br>${response}`;
+                // Przewijanie na dół
+                output.scrollTop = output.scrollHeight;
+            }
+        });
+
+        // Tło (cząsteczki)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        let pArray = [];
+        class P {
+            constructor() {
+                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
+                this.sX = Math.random() * 0.6 - 0.3; this.sY = Math.random() * 0.6 - 0.3;
+            }
+            draw() {
+                ctx.fillStyle = '#8a2be2'; ctx.beginPath();
+                ctx.arc(this.x, this.y, 1.5, 0, Math.PI * 2); ctx.fill();
+            }
+            update() {
+                this.x += this.sX; this.y += this.sY;
+                if (this.x < 0 || this.x > canvas.width) this.sX *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.sY *= -1;
+            }
+        }
+        for (let i = 0; i < 40; i++) pArray.push(new P());
+        function anim() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            pArray.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(anim);
+        }
+        anim();
+    </script>
+</body>
+</html>

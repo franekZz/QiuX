@@ -12,19 +12,23 @@
 
     <nav>
         <a href="#home">Start</a>
-        <a href="#projekty">Moje Projekty</a>
+        <a href="komendqiux.html">KomendQiuX</a>
         <a href="nie-projekty.html">Nie Projekty Q i X</a>
         <a href="jezyk.html">🌐 Język</a>
+        
         <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
+
         <button onclick="toggleTheme()" style="margin-left: 15px; cursor: pointer; background: none; border: 1px solid #bc13fe; color: #bc13fe; border-radius: 5px; padding: 2px 8px;">🌓 Tryb</button>
     </nav>
 
     <header class="container" id="home">
         <h1>QiuX</h1>
         <p>Oficjalna strona projektu Q i X</p>
+        
         <div style="margin-top: 15px; font-size: 0.8rem; color: #888;">
             Uruchomień systemu: <span style="color: #00ff00; font-weight: bold;">1,248</span>
         </div>
+
         <div style="margin-top: 20px; border-top: 1px solid #8a2be2; padding-top: 15px;">
             <p style="color: #bc13fe; font-weight: bold; margin: 5px 0;">Stworzone na: GitHub</p>
             <p style="color: #00d4ff; font-size: 0.9rem; margin: 5px 0;">Powered by GitHub and GitHub sites</p>
@@ -33,94 +37,93 @@
 
     <section class="container" id="projekty">
         <h2>Moje Projekty</h2>
-        <a href="https://franekzz.github.io/BootQX-OS/" class="download-btn" target="_blank" style="background-color: #2b0057; border: 2px solid #00d4ff; color: #00d4ff; min-width: 250px;">
-           BootQXOS VmPC
-        </a>
+        <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center;">
+            <a href="https://franekzz.github.io/BootQX-OS/" 
+               class="download-btn" 
+               target="_blank" 
+               style="background-color: #2b0057; border: 2px solid #00d4ff; color: #00d4ff; min-width: 250px;">
+               BootQXOS VmPC
+            </a>
+        </div>
     </section>
 
-    <section class="container" style="background: #000; border: 2px solid #bc13fe; text-align: left; font-family: 'Courier New', monospace; box-shadow: 0 0 15px rgba(188, 19, 254, 0.3);">
-        <div style="color: #bc13fe; border-bottom: 1px solid #bc13fe; padding-bottom: 5px; margin-bottom: 10px; font-size: 0.8rem;">
-            [ QiuX Command Line Interface ]
-        </div>
-        <div id="terminal-output" style="color: #00ff00; min-height: 60px; font-size: 0.9rem; line-height: 1.4;">
-            System gotowy. Wpisz komendę (np. 'help')...
-        </div>
-        <div style="display: flex; margin-top: 10px; border-top: 1px solid #333; padding-top: 5px;">
-            <span style="color: #00d4ff; margin-right: 10px;">root@QiuX:~#</span>
-            <input type="text" id="terminal-input" style="background: none; border: none; color: #fff; outline: none; width: 100%; font-family: 'Courier New', monospace;">
+    <section class="container" id="status">
+        <h2>Status Systemu</h2>
+        <div style="display: inline-block; padding: 10px 20px; background: #4b0082; border-radius: 50px; border: 1px solid #bc13fe;">
+            <span style="color: #00ff00;">●</span> Serwery GitHub Online
         </div>
     </section>
 
     <footer style="margin-top: 50px; padding: 30px; text-align: center; border-top: 1px solid #333;">
         <p style="color: #8a2be2; font-weight: bold; margin-bottom: 10px;">&copy; 2026 QiuX Hub</p>
-        <p style="color: #888; font-size: 0.9rem;">Gmail: franekzz2293@gmail.com | Tel: +48 665 295 964</p>
+        <div style="color: #888; font-size: 0.9rem; line-height: 1.6;">
+            <p>Gmail: franekzz2293@gmail.com</p>
+            <p>Tel: +48 665 295 964</p>
+        </div>
     </footer>
 
     <script>
-        // ZEGAR
+        // Logika Zegara
         function updateClock() {
-            document.getElementById('qx-clock').innerText = new Date().toLocaleTimeString();
+            const now = new Date();
+            document.getElementById('qx-clock').innerText = now.toLocaleTimeString();
         }
         setInterval(updateClock, 1000);
         updateClock();
 
-        // MOTYW
+        // Logika Motywu
         function toggleTheme() {
             document.getElementById('main-body').classList.toggle('light-mode');
         }
 
-        // TERMINAL LOGIKA
-        const input = document.getElementById('terminal-input');
-        const output = document.getElementById('terminal-output');
-
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const cmd = input.value.toLowerCase().trim();
-                input.value = '';
-                if (cmd === 'help') output.innerHTML = 'Komendy: start, wifi off, specs, clear';
-                else if (cmd === 'start') {
-                    output.innerText = 'Przewijanie...';
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-                else if (cmd === 'specs') output.innerText = 'RTX 3060, Gigabyte MB, QiuX-Core.';
-                else if (cmd === 'clear') output.innerText = 'Konsola wyczyszczona.';
-                else if (cmd === 'wifi off') {
-                    output.innerHTML = '<span style="color:red">CONNECTION TERMINATED. CRITICAL ERROR.</span>';
-                    setTimeout(() => {
-                        document.body.innerHTML = '<div style="background:#000;color:#fff;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif"><h1>404</h1><p>System Offline: Wifi Card Not Found</p><button onclick="location.reload()" style="padding:10px;margin-top:20px;cursor:pointer">REBOOT</button></div>';
-                    }, 1500);
-                }
-                else output.innerText = 'Błąd: Nieznana komenda ' + cmd;
-            }
-        });
-
-        // CZĄSTECZKI
+        // Efekt cząsteczek w tle
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        let pArray = [];
-        class P {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+
+        class Particle {
             constructor() {
-                this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height;
-                this.sX = Math.random() * 1 - 0.5; this.sY = Math.random() * 1 - 0.5;
-            }
-            draw() {
-                ctx.fillStyle = '#8a2be2'; ctx.beginPath();
-                ctx.arc(this.x, this.y, 2, 0, Math.PI * 2); ctx.fill();
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
             }
             update() {
-                this.x += this.sX; this.y += this.sY;
-                if (this.x < 0 || this.x > canvas.width) this.sX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.sY *= -1;
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = '#8a2be2';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
             }
         }
-        for (let i = 0; i < 50; i++) pArray.push(new P());
-        function anim() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            pArray.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(anim);
+
+        function init() {
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
         }
-        anim();
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
+
 </body>
 </html>

@@ -6,11 +6,17 @@
     <title>Nie Projekty Q i X | Social</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body id="main-body">
+
+    <canvas id="bg-canvas"></canvas>
 
     <nav>
         <a href="index.html">Start</a>
         <a href="jezyk.html">🌐 Język</a>
+        
+        <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
+
+        <button onclick="toggleTheme()" style="margin-left: 15px; cursor: pointer; background: none; border: 1px solid #bc13fe; color: #bc13fe; border-radius: 5px; padding: 2px 8px;">🌓 Tryb</button>
     </nav>
 
     <header class="container">
@@ -54,6 +60,69 @@
     <footer style="margin-top: 50px; text-align: center; color: #555; font-size: 0.8rem;">
         <p>&copy; 2026 QiuX Hub</p>
     </footer>
+
+    <script>
+        // Logika Zegara
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('qx-clock').innerText = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Logika Motywu
+        function toggleTheme() {
+            document.getElementById('main-body').classList.toggle('light-mode');
+        }
+
+        // Efekt cząsteczek
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        let particles = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = '#8a2be2';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < 50; i++) particles.push(new Particle());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 
 </body>
 </html>

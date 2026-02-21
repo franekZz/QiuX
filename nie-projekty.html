@@ -13,9 +13,7 @@
     <nav>
         <a href="index.html">Start</a>
         <a href="jezyk.html">🌐 Język</a>
-        
         <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
-
         <button onclick="toggleTheme()" style="margin-left: 15px; cursor: pointer; background: none; border: 1px solid #bc13fe; color: #bc13fe; border-radius: 5px; padding: 2px 8px;">🌓 Tryb</button>
     </nav>
 
@@ -25,31 +23,34 @@
     </header>
 
     <section class="container">
-        <div style="display: flex; flex-direction: column; gap: 20px; align-items: center; margin-top: 20px;">
+        <div style="display: flex; flex-direction: column; gap: 30px; align-items: center; margin-top: 20px;">
             
             <div style="width: 100%; max-width: 400px; padding: 20px; background: rgba(138, 43, 226, 0.1); border: 1px solid #8a2be2; border-radius: 15px;">
-                <h3 style="color: #fff; margin-bottom: 15px;">Steam: dejwdevoorginal</h3>
+                <h3 style="margin-bottom: 15px;">Steam: dejwdevoorginal</h3>
                 <a href="https://steamcommunity.com/profiles/76561198749125219/" 
                    target="_blank" 
-                   style="display: inline-block; padding: 10px 20px; background: #1b2838; color: #66c0f4; text-decoration: none; border-radius: 5px; font-weight: bold; border: 1px solid #66c0f4; transition: 0.3s;">
+                   class="download-btn"
+                   style="background: #1b2838; color: #66c0f4; border: 1px solid #66c0f4; animation: none;">
                    Otwórz Profil Steam
                 </a>
             </div>
 
             <div style="width: 100%; max-width: 400px; padding: 20px; background: rgba(255, 0, 0, 0.1); border: 1px solid #ff0000; border-radius: 15px;">
-                <h3 style="color: #fff; margin-bottom: 15px;">YouTube: franekzz</h3>
+                <h3 style="margin-bottom: 15px;">YouTube: franekzz</h3>
                 <a href="https://www.youtube.com/@franekZz" 
                    target="_blank" 
-                   style="display: inline-block; padding: 10px 20px; background: #ff0000; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; transition: 0.3s;">
+                   class="download-btn"
+                   style="background: #ff0000; color: #fff; border: none;">
                    Subskrybuj na YT
                 </a>
             </div>
 
-            <div style="width: 100%; max-width: 400px; padding: 20px; background: rgba(0, 0, 0, 0.5); border: 1px solid #00f2ea; border-radius: 15px; box-shadow: 2px 2px 10px rgba(255, 0, 80, 0.3);">
-                <h3 style="color: #fff; margin-bottom: 15px;">TikTok: franekzz1</h3>
+            <div style="width: 100%; max-width: 400px; padding: 20px; background: rgba(0, 0, 0, 0.5); border: 1px solid #00f2ea; border-radius: 15px;">
+                <h3 style="margin-bottom: 15px;">TikTok: franekzz1</h3>
                 <a href="https://www.tiktok.com/@franekzz1" 
                    target="_blank" 
-                   style="display: inline-block; padding: 10px 20px; background: #000; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; border: 1px solid #ff0050; transition: 0.3s;">
+                   class="download-btn"
+                   style="background: #000; color: #fff; border: 1px solid #ff0050;">
                    Obserwuj na TikToku
                 </a>
             </div>
@@ -62,7 +63,6 @@
     </footer>
 
     <script>
-        // Logika Zegara
         function updateClock() {
             const now = new Date();
             document.getElementById('qx-clock').innerText = now.toLocaleTimeString();
@@ -70,12 +70,10 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Logika Motywu
         function toggleTheme() {
             document.getElementById('main-body').classList.toggle('light-mode');
         }
 
-        // Efekt cząsteczek
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;

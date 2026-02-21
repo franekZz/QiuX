@@ -1,90 +1,136 @@
-/* Główne ustawienia */
-body {
-    background-color: #0d001a; /* Bardzo głęboki fiolet */
-    color: #e0b3ff;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* GŁÓWNE USTAWIENIA */
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Zakładki (Nawigacja) */
-nav {
-    background: rgba(45, 0, 89, 0.9);
+body {
+    background-color: #0d001a; /* Bardzo ciemny fiolet */
+    color: #ffffff;
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* TŁO Z CZĄSTECZKAMI */
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    padding: 20px 0;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    border-bottom: 3px solid #8a2be2;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* TRYB JASNY */
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #1a0033;
+}
+
+/* NAWIGACJA */
+nav {
+    background: rgba(26, 0, 51, 0.9);
+    padding: 15px;
     position: sticky;
     top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #8a2be2;
     z-index: 1000;
 }
 
+body.light-mode nav {
+    background: rgba(255, 255, 255, 0.9);
+    border-bottom: 1px solid #bc13fe;
+}
+
 nav a {
-    color: #fff;
+    color: #bc13fe;
     text-decoration: none;
     font-weight: bold;
-    text-transform: uppercase;
     transition: 0.3s;
 }
 
 nav a:hover {
-    color: #bc13fe;
-    text-shadow: 0 0 10px #bc13fe;
+    color: #00d4ff;
+    text-shadow: 0 0 10px #00d4ff;
 }
 
-/* Kontenery sekcji */
+/* KONTENERY */
 .container {
-    text-align: center;
-    margin: 40px 10px;
-    padding: 40px;
-    max-width: 900px;
-    background: rgba(25, 0, 50, 0.6);
-    border: 2px solid #8a2be2;
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(138, 43, 226, 0.05);
+    border: 1px solid #8a2be2;
     border-radius: 20px;
-    box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+    text-align: center;
+    backdrop-filter: blur(5px);
+    transition: 0.5s;
 }
 
-/* Wielki napis QiuX */
+body.light-mode .container {
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* NAGŁÓWKI */
 h1 {
-    font-size: 5rem;
-    color: #fff;
-    text-shadow: 0 0 20px #8a2be2, 0 0 40px #8a2be2;
-    margin: 0;
+    font-size: 3rem;
+    color: #bc13fe;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
 }
 
-/* PRZYCISKI - TO CIĘ INTERESUJE NAJBARDZIEJ */
+h2 {
+    color: #00d4ff;
+    margin-bottom: 20px;
+}
+
+/* PRZYCISKI */
 .download-btn {
     display: inline-block;
-    background-color: #8a2be2; /* Fioletowy */
-    color: white;
-    padding: 15px 40px;
-    margin: 15px;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: bold;
+    padding: 15px 35px;
     font-size: 1.2rem;
-    border: 2px solid #bc13fe;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.4s;
     cursor: pointer;
+    margin: 10px;
+    animation: pulse 2s infinite;
 }
 
-/* Efekt najechania: przyciemnienie i ruch */
 .download-btn:hover {
-    background-color: #4b0082; /* Ciemniejszy fiolet */
-    filter: brightness(0.8);    /* Dodatkowe przyciemnienie */
-    transform: translateY(-8px) scale(1.05); /* Ruch w górę i lekkie powiększenie */
-    box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
 }
 
-/* Stopka */
+/* ANIMACJA PULSOWANIA DLA PRZYCISKU */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+    70% { box-shadow: 0 0 0 15px rgba(0, 212, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+}
+
+/* STOPKA */
 footer {
-    margin-top: auto;
     padding: 20px;
-    color: #8a2be2;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+/* RESPONSYWNOŚĆ */
+@media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    nav { flex-wrap: wrap; gap: 10px; }
+    .container { margin: 20px; padding: 15px; }
 }

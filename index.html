@@ -13,6 +13,7 @@
     <nav>
         <a href="#home">Start</a>
         <a href="#projekty">Moje Projekty</a>
+        <a href="nie-projekty.html">Nie Projekty Q i X</a>
         <a href="jezyk.html">🌐 Język</a>
         
         <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
@@ -30,13 +31,17 @@
 
         <div style="margin-top: 20px; border-top: 1px solid #8a2be2; padding-top: 15px;">
             <p style="color: #bc13fe; font-weight: bold; margin: 5px 0;">Stworzone na: GitHub</p>
+            <p style="color: #00d4ff; font-size: 0.9rem; margin: 5px 0;">Powered by GitHub and GitHub sites</p>
         </div>
     </header>
 
     <section class="container" id="projekty">
         <h2>Moje Projekty</h2>
         <div style="margin-top: 30px; display: flex; flex-direction: column; align-items: center;">
-            <a href="https://franekzz.github.io/BootQX-OS/" class="download-btn" target="_blank" style="background-color: #2b0057; border: 2px solid #00d4ff; color: #00d4ff; min-width: 250px;">
+            <a href="https://franekzz.github.io/BootQX-OS/" 
+               class="download-btn" 
+               target="_blank" 
+               style="background-color: #2b0057; border: 2px solid #00d4ff; color: #00d4ff; min-width: 250px;">
                BootQXOS VmPC
             </a>
         </div>
@@ -49,8 +54,16 @@
         </div>
     </section>
 
+    <footer style="margin-top: 50px; padding: 30px; text-align: center; border-top: 1px solid #333;">
+        <p style="color: #8a2be2; font-weight: bold; margin-bottom: 10px;">&copy; 2026 QiuX Hub</p>
+        <div style="color: #888; font-size: 0.9rem; line-height: 1.6;">
+            <p>Gmail: franekzz2293@gmail.com</p>
+            <p>Tel: +48 665 295 964</p>
+        </div>
+    </footer>
+
     <script>
-        // Logika Zegara (Pomysł 2)
+        // Logika Zegara
         function updateClock() {
             const now = new Date();
             document.getElementById('qx-clock').innerText = now.toLocaleTimeString();
@@ -58,12 +71,12 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // Logika Motywu (Pomysł 5)
+        // Logika Motywu
         function toggleTheme() {
             document.getElementById('main-body').classList.toggle('light-mode');
         }
 
-        // Prosty efekt cząsteczek (Pomysł 7)
+        // Efekt cząsteczek
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -105,6 +118,11 @@
         }
         init();
         animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 
 </body>

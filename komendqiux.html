@@ -6,9 +6,10 @@
     <title>QiuX Terminal | System Console</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* Specjalne style dla terminala */
         .terminal-fullscreen {
-            background: #000 !important;
-            border: 2px solid #bc13fe !important;
+            background: #000;
+            border: 2px solid #bc13fe;
             text-align: left;
             font-family: 'Courier New', monospace;
             box-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
@@ -16,6 +17,27 @@
             display: flex;
             flex-direction: column;
             padding: 20px;
+            transition: 0.5s;
+        }
+
+        /* Tryb jasny dla terminala */
+        body.light-mode .terminal-fullscreen {
+            background: #ffffff !important;
+            border: 2px solid #8a2be2 !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode #terminal-output {
+            color: #1a0033 !important;
+        }
+
+        body.light-mode #terminal-input {
+            color: #000 !important;
+        }
+
+        body.light-mode .terminal-header {
+            color: #8a2be2 !important;
+            border-bottom: 1px solid #ddd !important;
         }
     </style>
 </head>
@@ -26,6 +48,7 @@
     <nav>
         <a href="index.html">Powrót</a>
         <span id="qx-clock" style="margin-left: 15px; color: #00d4ff; font-family: monospace; font-weight: bold;">00:00:00</span>
+        <button onclick="toggleTheme()" style="margin-left: 15px; cursor: pointer; background: none; border: 1px solid #bc13fe; color: #bc13fe; border-radius: 5px; padding: 2px 8px;">🌓 Tryb</button>
     </nav>
 
     <header class="container">
@@ -34,7 +57,7 @@
     </header>
 
     <section class="container terminal-fullscreen">
-        <div style="color: #bc13fe; border-bottom: 1px solid #bc13fe; padding-bottom: 10px; margin-bottom: 15px;">
+        <div class="terminal-header" style="color: #bc13fe; border-bottom: 1px solid #bc13fe; padding-bottom: 10px; margin-bottom: 15px; font-size: 0.8rem;">
             [ QiuX OS v1.0.4 - Terminal Session Active ]
         </div>
         
@@ -56,6 +79,11 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // Funkcja zmiany motywu
+        function toggleTheme() {
+            document.getElementById('main-body').classList.toggle('light-mode');
+        }
+
         // Obsługa terminala
         const input = document.getElementById('terminal-input');
         const output = document.getElementById('terminal-output');
@@ -67,15 +95,14 @@
                 
                 let response = "";
 
-                // Nowa logika komend wifi
                 if (cmd === 'help') {
-                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Powrót<br>- <span style='color:#bc13fe'>specs</span>: Hardware<br>- <span style='color:#bc13fe'>wifi on</span> / <span style='color:#bc13fe'>wifi true</span>: Włącz sieć<br>- <span style='color:#bc13fe'>wifi off</span> / <span style='color:#bc13fe'>wifi false</span>: Wyłącz sieć (SEKRET)<br>- <span style='color:#bc13fe'>clear</span>: Wyczyść";
+                    response = "Dostępne moduły:<br>- <span style='color:#bc13fe'>start</span>: Powrót do index<br>- <span style='color:#bc13fe'>wifi on</span> / <span style='color:#bc13fe'>wifi true</span>: Status sieci<br>- <span style='color:#bc13fe'>wifi off</span> / <span style='color:#bc13fe'>wifi false</span>: Wyłącz sieć (404)<br>- <span style='color:#bc13fe'>specs</span>: Hardware info<br>- <span style='color:#bc13fe'>clear</span>: Czyść ekran";
                 } 
                 else if (cmd === 'wifi on' || cmd === 'wifi true') {
-                    response = "<span style='color:#00ff00;'>Inicjowanie sterowników...</span><br>Masz dawno wifi.";
+                    response = "Inicjowanie... Masz dawno wifi.";
                 }
                 else if (cmd === 'wifi off' || cmd === 'wifi false') {
-                    output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br><span style='color:red'>WARNING: DISCONNECTING...</span>`;
+                    output.innerHTML += `<br><span style="color:#888;">> ${cmd}</span><br><span style='color:red'>CRITICAL ERROR: WIFI DISCONNECTED</span>`;
                     setTimeout(() => {
                         document.body.innerHTML = '<div style="background:#000;color:#fff;height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;font-family:sans-serif"><h1>404</h1><p>System Offline: Wifi Card Not Found</p><button onclick="location.reload()" style="padding:10px;margin-top:20px;cursor:pointer;background:#bc13fe;border:none;color:white;font-weight:bold;">REBOOT SYSTEM</button></div>';
                     }, 1500);
@@ -86,7 +113,7 @@
                     setTimeout(() => window.location.href = "index.html", 800);
                 }
                 else if (cmd === 'specs') {
-                    response = "GPU: RTX 3060 | MBD: Gigabyte | QiuX-Core Engine Active.";
+                    response = "GPU: RTX 3060 | MBD: Gigabyte | CPU: QiuX-Engine";
                 }
                 else if (cmd === 'clear') {
                     output.innerHTML = "Konsola wyczyszczona.";
@@ -128,6 +155,11 @@
             requestAnimationFrame(anim);
         }
         anim();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
